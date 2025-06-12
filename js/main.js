@@ -27,8 +27,154 @@ document.addEventListener('DOMContentLoaded', function() {
   if (document.querySelector('.timeline')) {
     initAboutPage();
   }
+
+  // Initialize mobile navigation
+  initMobileNavigation();
+
+  // Initialize touch interactions for mobile
 });
 
+// Mobile navigation functionality
+function initMobileNavigation() {
+  const navToggle = document.querySelector('.nav-toggle');
+  const navMenu = document.querySelector('.nav-menu');
+  const navLinks = document.querySelectorAll('.nav-link');
+  
+  // Create hamburger menu if it doesn't exist
+  if (!navToggle) {
+    const navContent = document.querySelector('.nav-content');
+    const hamburger = document.createElement('div');
+    hamburger.className = 'nav-toggle';
+    hamburger.innerHTML = '<span></span><span></span><span></span>';
+    navContent.appendChild(hamburger);
+    
+    // Add event listener to new hamburger menu
+    hamburger.addEventListener('click', toggleMobileMenu);
+  } else {
+    navToggle.addEventListener('click', toggleMobileMenu);
+  }
+  
+  function toggleMobileMenu() {
+    const toggle = document.querySelector('.nav-toggle');
+    const menu = document.querySelector('.nav-menu');
+    
+    toggle.classList.toggle('active');
+    menu.classList.toggle('active');
+    document.body.classList.toggle('nav-open');
+  }
+  
+  // Close mobile menu when clicking on links
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      const toggle = document.querySelector('.nav-toggle');
+      const menu = document.querySelector('.nav-menu');
+      
+      if (menu.classList.contains('active')) {
+        toggle.classList.remove('active');
+        menu.classList.remove('active');
+        document.body.classList.remove('nav-open');
+      }
+    });
+  });
+  
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (e) => {
+    const toggle = document.querySelector('.nav-toggle');
+    const menu = document.querySelector('.nav-menu');
+    const nav = document.querySelector('.nav');
+    
+    if (menu.classList.contains('active') && !nav.contains(e.target)) {
+      toggle.classList.remove('active');
+      menu.classList.remove('active');
+      document.body.classList.remove('nav-open');
+    }
+  });
+}
+
+// Touch interactions for mobile devices
+function initTouchInteractions() {
+  // Check if device supports touch
+  if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+    // Handle media items touch flip
+    const mediaItems = document.querySelectorAll('.media-item');
+    mediaItems.forEach(item => {
+      let touchStartTime = 0;
+      
+      item.addEventListener('touchstart', (e) => {
+        touchStartTime = Date.now();
+      });
+      
+      item.addEventListener('touchend', (e) => {
+        const touchEndTime = Date.now();
+        const touchDuration = touchEndTime - touchStartTime;
+        
+        // Only flip if it's a quick tap (not a scroll)
+        if (touchDuration < 300) {
+          e.preventDefault();
+          item.classList.toggle('touch-flip');
+          
+          // Remove flip class after 3 seconds for better UX
+          setTimeout(() => {
+            item.classList.remove('touch-flip');
+          }, 3000);
+        }
+      });
+    });
+    
+    // Handle project items touch flip
+    const projectItems = document.querySelectorAll('.project-item');
+    projectItems.forEach(item => {
+      let touchStartTime = 0;
+      
+      item.addEventListener('touchstart', (e) => {
+        touchStartTime = Date.now();
+      });
+      
+      item.addEventListener('touchend', (e) => {
+        const touchEndTime = Date.now();
+        const touchDuration = touchEndTime - touchStartTime;
+        
+        if (touchDuration < 300) {
+          e.preventDefault();
+          item.classList.toggle('touch-flip');
+          
+          setTimeout(() => {
+            item.classList.remove('touch-flip');
+          }, 3000);
+        }
+      });
+    });
+  }
+  
+  // Enhanced touch scrolling for pagination
+  const paginationContainers = document.querySelectorAll('.pagination');
+  paginationContainers.forEach(container => {
+    let isScrolling = false;
+    
+    container.addEventListener('touchstart', () => {
+      isScrolling = false;
+    });
+    
+    container.addEventListener('touchmove', () => {
+      isScrolling = true;
+    });
+    
+    container.addEventListener('touchend', (e) => {
+      if (isScrolling) {
+        e.preventDefault();
+      }
+    });
+  });
+}
+
+// Enhanced viewport detection for mobile optimizations
+function isMobileDevice() {
+  return window.innerWidth <= 768 || 
+         ('ontouchstart' in window) || 
+         (navigator.maxTouchPoints > 0);
+}
+
+// Optimize particles for mobile
 function initHomepage() {
   // Media tabs functionality
   const mediaTabs = document.querySelectorAll('.media-tab');
@@ -78,11 +224,14 @@ function initHomepage() {
   particlesScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js';
   document.body.appendChild(particlesScript);
   
+  // Reduce particle count on mobile for better performance
+  const particleCount = isMobileDevice() ? 40 : 80;
+  
   particlesScript.onload = function() {
     particlesJS('particles-js', {
       "particles": {
         "number": {
-          "value": 80,
+          "value": particleCount,
           "density": {
             "enable": true,
             "value_area": 800
@@ -198,7 +347,7 @@ function initWorldMap() {
   if (!mapContainer) return;
   
   const width = mapContainer.clientWidth;
-  const height = 500;
+  const height = isMobileDevice() ? 350 : 500;
   
   const svg = d3.select('#world-map')
     .append('svg')
@@ -206,7 +355,7 @@ function initWorldMap() {
     .attr('height', height);
   
   const projection = d3.geoNaturalEarth1()
-    .scale(width / 5)
+    .scale(isMobileDevice() ? width / 6 : width / 5)
     .translate([width / 2, height / 2]);
   
   const path = d3.geoPath()
@@ -214,8 +363,8 @@ function initWorldMap() {
   
   // Sample visited locations (longitude, latitude)
   const visitedPlaces = [
-    { name: "Tokyo", coords: [139.7, 35.7], size: 6 },
-    { name: "Sapporo", coords: [141.3, 43.1], size: 4 },
+    { name: "Tokyo", coords: [139.7, 35.7], size: isMobileDevice() ? 4 : 6 },
+    { name: "Sapporo", coords: [141.3, 43.1], size: isMobileDevice() ? 3 : 4 },
     { name: "Kushiro", coords: [144.2, 42.6], size: 2 },
     { name: "Kyoto", coords: [135.7, 35.0], size: 4 },
     { name: "Osaka", coords: [135.5, 34.7], size: 4 },
@@ -334,15 +483,31 @@ function initAboutPage() {
   const timelineItems = document.querySelectorAll('.timeline-item');
   
   timelineItems.forEach(item => {
-    item.addEventListener('mouseenter', function() {
-      this.querySelector('.timeline-content').style.transform = 'scale(1.02)';
-      this.querySelector('.timeline-marker').style.transform = 'translateX(-50%) scale(1.1)';
-    });
-    
-    item.addEventListener('mouseleave', function() {
-      this.querySelector('.timeline-content').style.transform = 'scale(1)';
-      this.querySelector('.timeline-marker').style.transform = 'translateX(-50%) scale(1)';
-    });
+    if (!isMobileDevice()) {
+      // Desktop hover effects
+      item.addEventListener('mouseenter', function() {
+        this.querySelector('.timeline-content').style.transform = 'scale(1.02)';
+        this.querySelector('.timeline-marker').style.transform = 'translateX(-50%) scale(1.1)';
+      });
+      
+      item.addEventListener('mouseleave', function() {
+        this.querySelector('.timeline-content').style.transform = 'scale(1)';
+        this.querySelector('.timeline-marker').style.transform = 'translateX(-50%) scale(1)';
+      });
+    } else {
+      // Mobile tap effects
+      item.addEventListener('touchstart', function() {
+        this.querySelector('.timeline-content').style.transform = 'scale(1.02)';
+        this.querySelector('.timeline-marker').style.transform = 'translateX(-50%) scale(1.1)';
+      });
+      
+      item.addEventListener('touchend', function() {
+        setTimeout(() => {
+          this.querySelector('.timeline-content').style.transform = 'scale(1)';
+          this.querySelector('.timeline-marker').style.transform = 'translateX(-50%) scale(1)';
+        }, 150);
+      });
+    }
   });
 
   // Smooth scroll for internal links
@@ -558,3 +723,18 @@ function updatePage(panelId, page) {
     nextButton.classList.toggle('disabled', page === totalPages);
   }
 }
+
+// Enhanced window resize handler
+window.addEventListener('resize', function() {
+  // Reinitialize mobile features if viewport changes
+  if (window.innerWidth <= 768) {
+    // Ensure mobile navigation is properly initialized
+    const navMenu = document.querySelector('.nav-menu');
+    const navToggle = document.querySelector('.nav-toggle');
+    
+    if (navMenu.classList.contains('active')) {
+      navMenu.classList.remove('active');
+      if (navToggle) navToggle.classList.remove('active');
+    }
+  }
+});
