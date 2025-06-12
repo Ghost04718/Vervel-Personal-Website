@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>陈子琦 - 个人网站</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav-content">
+        <a href="index.html" class="nav-logo">陈子琦</a>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link active">首页</a></li>
+          <li><a href="about.html" class="nav-link">关于我</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero with Particles -->
+  <section class="hero">
+    <div id="particles-js" class="particles-container"></div>
+    <div class="container">
+      <div class="hero-content fade-in">
+        <h1 class="hero-title">你好，我是 <span id="name">陈子琦</span></h1>
+        <p class="hero-subtitle">AI 爱好者，书迷，旅行者</p>
+        <p class="hero-quote">纵有疾风起，人生不言弃。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Media Tabs Section (Books, Music, Digitals) -->
+  <section id="media" class="media-section">
+    <div class="container media-container">
+      <h2 class="section-title animate fade-in">我喜欢的合集</h2>
+      
+      <div class="media-tabs animate zoom-in">
+        <button class="media-tab active" data-target="books">书籍</button>
+        <button class="media-tab" data-target="music">艺术家</button>
+        <button class="media-tab" data-target="digitals">数字作品</button>
+      </div>
+      
+      <!-- Books Panel with Flip Cards -->
+      <div id="books" class="media-panel active">
+        <div class="media-grid">
+
+          <!-- Book 1 -->
+          <div class="media-item animate fade-in delay-1">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//norwegian-wood.jpeg" alt="Book: Norwegian Wood">
+              </div>
+              <div class="media-back">
+                <h3>挪威的森林</h3>
+                <p class="media-subtitle">村上春树</p>
+                <p>希望你可以记住我，记住我这样活过，这样在你身边呆过。</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Book 2 -->
+          <div class="media-item animate fade-in delay-2">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//a-song-of-ice-and-fire.jpeg" alt="Book: A Song of Ice and Fire">
+              </div>
+              <div class="media-back">
+                <h3>冰与火之歌</h3>
+                <p class="media-subtitle">乔治马丁</p>
+                <p>头脑需要书籍，正如宝剑需要磨刀石以保持锋利</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Book 3 -->
+          <div class="media-item animate fade-in delay-1">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//izu-dancer.jpg" alt="Book: The Izu Dancer">
+              </div>
+              <div class="media-back">
+                <h3>伊豆的舞女</h3>
+                <p class="media-subtitle">川端康成</p>
+                <p>我听任泪水向下流。我的头脑变成一泓清水，滴滴答答地流出来，以后什么都没有留下，只感觉甜蜜的愉快。</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Book 4 -->
+          <div class="media-item animate fade-in delay-1">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//musong.jpeg" alt="Book: 目送">
+              </div>
+              <div class="media-back">
+                <h3>目送</h3>
+                <p class="media-subtitle">龙应台</p>
+                <p>我慢慢地、慢慢地了解到，所谓父女母子一场，只不过意味着，你和他的缘分就是今生今世不断地在目送他的背影渐行渐远。</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Book 5 -->
+          <div class="media-item animate fade-in delay-1">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//qingchengzhilian.jpg" alt="Book: 倾城之恋">
+              </div>
+              <div class="media-back">
+                <h3>倾城之恋</h3>
+                <p class="media-subtitle">张爱玲</p>
+                <p>花落自会又花开，花开自有落花来，醒也迟，梦也迟，一朝风雨满秋池，却是一片疏雨轻烟。</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Book 6 -->
+          <div class="media-item animate fade-in delay-1">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//taibeiren.jpg" alt="Book: 台北人">
+              </div>
+              <div class="media-back">
+                <h3>台北人</h3>
+                <p class="media-subtitle">白先勇</p>
+                <p>人生是虚无。一场梦。一个记忆。</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="pagination books-pagination">
+          <button class="pagination-button prev-page" data-panel="books">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <span class="pagination-info">Page <span class="current-page">1</span> of <span class="total-pages">1</span></span>
+          <button class="pagination-button next-page" data-panel="books">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Artists Panel with Flip Cards -->
+      <div id="music" class="media-panel">
+        <div class="media-grid">
+
+          <!-- Artist 1 -->
+          <div class="media-item">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//haruki-murakami.jpg" alt="Artist: Haruki Murakami">
+              </div>
+              <div class="media-back">
+                <h3>Haruki Murakami</h3>
+                <p class="media-subtitle">Japanese Writer</p>
+                <p>I want you always to remember me. Will you remember that I existed, and that I stood next to you like this?</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Artist 2 -->
+          <div class="media-item">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//billie-eilish.jpeg" alt="Artist: Billie Eilish">
+              </div>
+              <div class="media-back">
+                <h3>Billie Eilish</h3>
+                <p class="media-subtitle">American Singer-songwriter and Musician</p>
+                <p>I hope someday I'll make it out of here. Even if it takes all night or a hundred years.</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Artist 3 -->
+          <div class="media-item">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//sawano.jpeg" alt="Artist: Sawano Hiroyuki">
+              </div>
+              <div class="media-back">
+                <h3>Sawano Hiroyuki</h3>
+                <p class="media-subtitle">Japanese Composer and Music Producer</p>
+                <p>I don't have the power. On my side forever.</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Artist 4 -->
+          <div class="media-item">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//eason-chan.jpeg" alt="Artist: Eason Chan">
+              </div>
+              <div class="media-back">
+                <h3>Eason Chan</h3>
+                <p class="media-subtitle">Hong Kong Singer and Actor</p>
+                <p>Sorrow Is Meaningless.</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Artist 5 -->
+          <div class="media-item">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//hans-zimmer.jpeg" alt="Artist: Hans Zimmer">
+              </div>
+              <div class="media-back">
+                <h3>Hans Zimmer</h3>
+                <p class="media-subtitle">German Composer and Music Producer</p>
+                <p>If something happened where I couldn't write music anymore, it would kill me. It's not just a job. It's not just a hobby. It's why I get up in the morning.</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="pagination music-pagination">
+          <button class="pagination-button prev-page" data-panel="music">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <span class="pagination-info">Page <span class="current-page">1</span> of <span class="total-pages">1</span></span>
+          <button class="pagination-button next-page" data-panel="music">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Digitals Panel with Flip Cards -->
+      <div id="digitals" class="media-panel">
+        <div class="media-grid">
+
+          <!-- Anime 1 -->
+          <div class="media-item">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//cyberpunk-edgerunners.jpg" alt="Anime: Cyberpunk Edgerunners">
+              </div>
+              <div class="media-back">
+                <h3>Cyberpunk Edgerunners</h3>
+                <p class="media-subtitle">Netflix</p>
+                <p>I’m Gonna Take You There Myself, Fly You To The Moon. That's A Promise.</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Anime 2 -->
+          <div class="media-item">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//attack-on-titan.jpeg" alt="Anime: Attack on Titan">
+              </div>
+              <div class="media-back">
+                <h3>Attack on Titan</h3>
+                <p class="media-subtitle">Hajime Isayama</p>
+                <p>Tatakae, Tatakae, TATAKAE!</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Anime 3 -->
+          <div class="media-item">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//your-name.jpeg" alt="Anime: Your Name">
+              </div>
+              <div class="media-back">
+                <h3>Your Name</h3>
+                <p class="media-subtitle">Makoto Shinkai</p>
+                <p>I feel like I'm always searching for someone, or something.</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Drama 1 -->
+          <div class="media-item">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//dark.jpg" alt="Drama: Dark">
+              </div>
+              <div class="media-back">
+                <h3>Dark</h3>
+                <p class="media-subtitle">Netflix</p>
+                <p>What We Know Is A Drop. What We Don't Know Is an Ocean.</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Drama 2 -->
+          <div class="media-item">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//the-man-in-the-high-castle.jpeg" alt="Drama: The Man in the High Castle">
+              </div>
+              <div class="media-back">
+                <h3>The Man in the High Castle</h3>
+                <p class="media-subtitle">Philip K. Dick</p>
+                <p>A weird time in which we are alive. We can travel anywhere we want, even to other planets. And for what? To sit day after day, declining in morale and hope.</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Drama 3 -->
+          <div class="media-item">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//gotham.jpg" alt="Drama: Gotham">
+              </div>
+              <div class="media-back">
+                <h3>Gotham</h3>
+                <p class="media-subtitle">DC</p>
+                <p>Sometimes it's only madness that makes us what we are.</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-empty"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Drama 4 -->
+          <div class="media-item">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//mandalorian.jpg" alt="Drama: The Mandalorian">
+              </div>
+              <div class="media-back">
+                <h3>The Mandalorian</h3>
+                <p class="media-subtitle">Disney</p>
+                <p>This is the Way.</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Drama 5 -->
+          <div class="media-item">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//stranger-things.jpg" alt="Drama: Stranger Things">
+              </div>
+              <div class="media-back">
+                <h3>Stranger Things</h3>
+                <p class="media-subtitle">Netflix</p>
+                <p>Make mistakes, learn from them, and when life hurts you—because it will—remember the hurt. The hurt is good. It means you're out of that cave.</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Drama 6 -->
+          <div class="media-item">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//severance.jpeg" alt="Drama: Severance">
+              </div>
+              <div class="media-back">
+                <h3>Severance</h3>
+                <p class="media-subtitle">Apple TV</p>
+                <p>The surest way to tame a prisoner is to let him believe he's free.</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-empty"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Movie 1 -->
+          <div class="media-item">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//ghost-in-the-shell.jpg" alt="Movie: Ghost in the Shell">
+              </div>
+              <div class="media-back">
+                <h3>Ghost in the Shell</h3>
+                <p class="media-subtitle">Masamune Shirow</p>
+                <p>Man is an individual only because of his intangible memory. But memory cannot be defined, yet it defines mankind.</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-empty"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Movie 2 -->
+          <div class="media-item">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//dark-knight-trilogy.jpeg" alt="Movie: The Dark Knight Trilogy">
+              </div>
+              <div class="media-back">
+                <h3>The Dark Knight Trilogy</h3>
+                <p class="media-subtitle">Christopher Nolan</p>
+                <p>Why do we fall, Bruce? So that we can learn to pick ourselves up again.</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Movie 3 -->
+          <div class="media-item">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//godfather.jpg" alt="Movie: The Godfather Trilogy">
+              </div>
+              <div class="media-back">
+                <h3>The Godfather Trilogy</h3>
+                <p class="media-subtitle">Francis Ford Coppola</p>
+                <p>Great men are not born great, they grow great.</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Movie 4 -->
+          <div class="media-item">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//the-professional.jpg" alt="Movie: The Professional">
+              </div>
+              <div class="media-back">
+                <h3>Leon: The Professional</h3>
+                <p class="media-subtitle">Luc Besson</p>
+                <p>Is life always this hard, or is it just when you're a kid? Always like this.</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Movie 5 -->
+          <div class="media-item">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//dune.png" alt="Movie: Dune">
+              </div>
+              <div class="media-back">
+                <h3>Dune</h3>
+                <p class="media-subtitle">Frank Herbert</p>
+                <p>Where the fear has gone there will be nothing. Only I will remain.</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Game 1 -->
+          <div class="media-item">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//HOI-4.png" alt="Game: Heart of Iron IV">
+              </div>
+              <div class="media-back">
+                <h3>Heart of Iron IV</h3>
+                <p class="media-subtitle">Paradox</p>
+                <p>Success consists of going from failure to failure without loss of enthusiasm. - Winston Churchill</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Game 2 -->
+          <div class="media-item">
+            <div class="media-item-inner">
+              <div class="media-image">
+                <img src="images//arknights.jpg" alt="Game: Arknights">
+              </div>
+              <div class="media-back">
+                <h3>Arknights</h3>
+                <p class="media-subtitle">Hypergryph</p>
+                <p>At the far end of our civilization, once adorned by darkness and the brilliance of the stars up above, we will meet once again. - Priestess</p>
+                <div class="media-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="pagination digitals-pagination">
+          <button class="pagination-button prev-page" data-panel="digitals">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <span class="pagination-info">第 <span class="current-page">1</span> 页，共 <span class="total-pages">1</span> 页</span>
+          <button class="pagination-button next-page" data-panel="digitals">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Travel Map -->
+  <section id="travel">
+    <div class="container">
+      <h2 class="section-title fade-in">我去过的地方</h2>
+      <div class="map-container fade-in delay-2" id="world-map"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 陈子琦。保留所有权利。</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
