@@ -32,9 +32,10 @@ document.addEventListener('DOMContentLoaded', function() {
   initMobileNavigation();
 
   // Initialize touch interactions for mobile
+  initTouchInteractions();
 });
 
-// Mobile navigation functionality
+// Enhanced Mobile navigation functionality
 function initMobileNavigation() {
   const navToggle = document.querySelector('.nav-toggle');
   const navMenu = document.querySelector('.nav-menu');
@@ -61,6 +62,24 @@ function initMobileNavigation() {
     toggle.classList.toggle('active');
     menu.classList.toggle('active');
     document.body.classList.toggle('nav-open');
+    
+    // Prevent body scroll when menu is open
+    if (menu.classList.contains('active')) {
+      document.body.style.overflow = 'hidden';
+      // Add smooth slide-in animation for menu items
+      const menuItems = menu.querySelectorAll('.nav-link');
+      menuItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+          item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+          item.style.opacity = '1';
+          item.style.transform = 'translateY(0)';
+        }, index * 100 + 200);
+      });
+    } else {
+      document.body.style.overflow = '';
+    }
   }
   
   // Close mobile menu when clicking on links
@@ -91,80 +110,167 @@ function initMobileNavigation() {
   });
 }
 
-// Touch interactions for mobile devices
+// Enhanced Touch interactions for mobile devices
 function initTouchInteractions() {
   // Check if device supports touch
   if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-    // Handle media items touch flip
+    // Add mobile device class for styling
+    document.body.classList.add('mobile-device');
+    
+    // Handle media items touch flip with improved feedback
     const mediaItems = document.querySelectorAll('.media-item');
     mediaItems.forEach(item => {
       let touchStartTime = 0;
+      let touchStartY = 0;
+      let isFlipped = false;
       
       item.addEventListener('touchstart', (e) => {
         touchStartTime = Date.now();
+        touchStartY = e.touches[0].clientY;
+        item.classList.add('touch-active');
+      });
+      
+      item.addEventListener('touchmove', (e) => {
+        const touchMoveY = e.touches[0].clientY;
+        const moveDistance = Math.abs(touchMoveY - touchStartY);
+        
+        // If user is scrolling, don't flip
+        if (moveDistance > 15) {
+          item.classList.remove('touch-active');
+        }
       });
       
       item.addEventListener('touchend', (e) => {
         const touchEndTime = Date.now();
         const touchDuration = touchEndTime - touchStartTime;
+        const touchMoveY = e.changedTouches[0].clientY;
+        const moveDistance = Math.abs(touchMoveY - touchStartY);
         
-        // Only flip if it's a quick tap (not a scroll)
-        if (touchDuration < 300) {
+        item.classList.remove('touch-active');
+        
+        // Only flip if it's a quick tap and not a scroll
+        if (touchDuration < 300 && moveDistance < 15) {
           e.preventDefault();
-          item.classList.toggle('touch-flip');
+          isFlipped = !isFlipped;
+          item.classList.toggle('touch-flip', isFlipped);
           
-          // Remove flip class after 3 seconds for better UX
+          // Add haptic feedback if available
+          if ('vibrate' in navigator) {
+            navigator.vibrate(30);
+          }
+          
+          // Auto-flip back after 5 seconds for better UX
           setTimeout(() => {
-            item.classList.remove('touch-flip');
-          }, 3000);
+            if (isFlipped) {
+              item.classList.remove('touch-flip');
+              isFlipped = false;
+            }
+          }, 5000);
         }
+      });
+      
+      item.addEventListener('touchcancel', () => {
+        item.classList.remove('touch-active');
       });
     });
     
-    // Handle project items touch flip
+    // Handle project items touch flip with similar improvements
     const projectItems = document.querySelectorAll('.project-item');
     projectItems.forEach(item => {
       let touchStartTime = 0;
+      let touchStartY = 0;
+      let isFlipped = false;
       
       item.addEventListener('touchstart', (e) => {
         touchStartTime = Date.now();
+        touchStartY = e.touches[0].clientY;
+        item.classList.add('touch-active');
+      });
+      
+      item.addEventListener('touchmove', (e) => {
+        const touchMoveY = e.touches[0].clientY;
+        const moveDistance = Math.abs(touchMoveY - touchStartY);
+        
+        if (moveDistance > 15) {
+          item.classList.remove('touch-active');
+        }
       });
       
       item.addEventListener('touchend', (e) => {
         const touchEndTime = Date.now();
         const touchDuration = touchEndTime - touchStartTime;
+        const touchMoveY = e.changedTouches[0].clientY;
+        const moveDistance = Math.abs(touchMoveY - touchStartY);
         
-        if (touchDuration < 300) {
+        item.classList.remove('touch-active');
+        
+        if (touchDuration < 300 && moveDistance < 15) {
           e.preventDefault();
-          item.classList.toggle('touch-flip');
+          isFlipped = !isFlipped;
+          item.classList.toggle('touch-flip', isFlipped);
+          
+          if ('vibrate' in navigator) {
+            navigator.vibrate(30);
+          }
           
           setTimeout(() => {
-            item.classList.remove('touch-flip');
-          }, 3000);
+            if (isFlipped) {
+              item.classList.remove('touch-flip');
+              isFlipped = false;
+            }
+          }, 5000);
         }
       });
+      
+      item.addEventListener('touchcancel', () => {
+        item.classList.remove('touch-active');
+      });
     });
+    
+    // Enhanced swipe gesture for media tabs on mobile
+    const mediaTabsContainer = document.querySelector('.media-tabs');
+    const mediaTabs = document.querySelectorAll('.media-tab');
+    
+    if (mediaTabsContainer && isMobileDevice()) {
+      let startX = 0;
+      let currentTabIndex = 0;
+      
+      // Update current tab index based on active tab
+      mediaTabs.forEach((tab, index) => {
+        if (tab.classList.contains('active')) {
+          currentTabIndex = index;
+        }
+      });
+      
+      mediaTabsContainer.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+      });
+      
+      mediaTabsContainer.addEventListener('touchend', (e) => {
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+        
+        if (Math.abs(diff) > 80) { // Minimum swipe distance
+          if (diff > 0 && currentTabIndex < mediaTabs.length - 1) {
+            // Swipe left - next tab
+            currentTabIndex++;
+          } else if (diff < 0 && currentTabIndex > 0) {
+            // Swipe right - previous tab
+            currentTabIndex--;
+          }
+          
+          mediaTabs[currentTabIndex].click();
+        }
+      });
+      
+      // Update current tab index when tabs are clicked
+      mediaTabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+          currentTabIndex = index;
+        });
+      });
+    }
   }
-  
-  // Enhanced touch scrolling for pagination
-  const paginationContainers = document.querySelectorAll('.pagination');
-  paginationContainers.forEach(container => {
-    let isScrolling = false;
-    
-    container.addEventListener('touchstart', () => {
-      isScrolling = false;
-    });
-    
-    container.addEventListener('touchmove', () => {
-      isScrolling = true;
-    });
-    
-    container.addEventListener('touchend', (e) => {
-      if (isScrolling) {
-        e.preventDefault();
-      }
-    });
-  });
 }
 
 // Enhanced viewport detection for mobile optimizations
@@ -724,17 +830,44 @@ function updatePage(panelId, page) {
   }
 }
 
-// Enhanced window resize handler
+// Enhanced window resize handler with debouncing
+let resizeTimeout;
 window.addEventListener('resize', function() {
-  // Reinitialize mobile features if viewport changes
-  if (window.innerWidth <= 768) {
-    // Ensure mobile navigation is properly initialized
-    const navMenu = document.querySelector('.nav-menu');
-    const navToggle = document.querySelector('.nav-toggle');
-    
-    if (navMenu.classList.contains('active')) {
-      navMenu.classList.remove('active');
-      if (navToggle) navToggle.classList.remove('active');
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(() => {
+    // Reinitialize mobile features if viewport changes
+    if (window.innerWidth <= 768) {
+      // Ensure mobile navigation is properly initialized
+      const navMenu = document.querySelector('.nav-menu');
+      const navToggle = document.querySelector('.nav-toggle');
+      
+      if (navMenu && navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+        if (navToggle) navToggle.classList.remove('active');
+        document.body.style.overflow = '';
+        document.body.classList.remove('nav-open');
+      }
+    } else {
+      // Reset mobile navigation state on desktop
+      document.body.classList.remove('nav-open');
+      document.body.style.overflow = '';
     }
-  }
+    
+    // Recalculate world map if it exists
+    const worldMap = document.getElementById('world-map');
+    if (worldMap && worldMap.innerHTML.includes('svg')) {
+      // Clear and reinitialize map on significant resize
+      worldMap.innerHTML = '';
+      initWorldMap();
+    }
+  }, 250);
 });
+
+// Add performance optimization for mobile
+if (isMobileDevice()) {
+  // Reduce animation duration for better performance
+  document.documentElement.style.setProperty('--animation-duration', '0.3s');
+  
+  // Disable hover effects on mobile
+  document.body.classList.add('mobile-device');
+}
